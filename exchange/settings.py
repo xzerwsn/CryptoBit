@@ -80,7 +80,7 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'exchange.asgi.application'
 
-# ��������� ������� (Redis)
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer'
@@ -136,6 +136,7 @@ USE_TZ = True
 # ��������� ��� ����������� ������ (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # ��������� ��� �����-������ (�������� �������������)
 MEDIA_URL = '/media/'
