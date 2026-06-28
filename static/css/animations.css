@@ -1,0 +1,221 @@
+/* Price animations */
+.price-flash-up {
+  animation: flashGreen 1.5s ease-out;
+}
+
+.price-flash-down {
+  animation: flashRed 1.5s ease-out;
+}
+
+@keyframes flashGreen {
+  0% { background-color: rgba(40, 167, 69, 0.3); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+  0% { background-color: rgba(220, 53, 69, 0.3); }
+  100% { background-color: transparent; }
+}
+
+/* Change percentage animations */
+.change-updated {
+  animation: pulse 0.4s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1.2); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Connection status pulse */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(40, 167, 69, 0); }
+}
+
+/* Live indicator pulse */
+@keyframes cw-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Price input update */
+.price-input-updated {
+  animation: inputFlash 0.5s ease-out;
+}
+
+@keyframes inputFlash {
+  0% { background-color: rgba(255, 193, 7, 0.3); border-color: #ffc107; }
+  100% { background-color: transparent; border-color: var(--border); }
+}
+
+/* Price value transition */
+.price-value {
+  transition: color 0.3s ease;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+
+.flip-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.02em;
+}
+
+.flip-char {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.62ch;
+}
+
+.flip-char-empty {
+  visibility: hidden;
+}
+
+.flip-digit {
+  position: relative;
+  display: inline-block;
+  min-width: 0.62ch;
+  height: 1.15em;
+  overflow: hidden;
+  line-height: 1.15;
+}
+
+.flip-digit-reel {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.flip-digit-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.15em;
+}
+
+.price-tick-up {
+  animation: priceTickUp 0.35s ease-out;
+}
+
+.price-tick-down {
+  animation: priceTickDown 0.35s ease-out;
+}
+
+.flip-digit-up .flip-digit-reel {
+  animation: digitRollUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-digit-down .flip-digit-reel {
+  animation: digitRollDown 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes priceTickUp {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes priceTickDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes digitRollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes digitRollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+/* Change value transition */
+.change-value {
+  transition: all 0.3s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+.totem-profit-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}
+
+.totem-profit-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  animation: totemProfitPop 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  filter: drop-shadow(0 0 12px rgba(255, 214, 102, 0.25));
+}
+
+.totem-profit-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #f7d774;
+  text-transform: uppercase;
+}
+
+.totem-profit-value {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: clamp(34px, 6vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-shadow:
+    0 0 10px rgba(255, 214, 102, 0.32),
+    0 0 28px rgba(255, 214, 102, 0.18);
+}
+
+.totem-profit-value.is-pos {
+  color: #f6f1cb;
+}
+
+.totem-profit-value.is-neg {
+  color: #ffb3a3;
+}
+
+.totem-profit-symbol {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(242, 239, 232, 0.78);
+  text-transform: uppercase;
+}
+
+@keyframes totemProfitPop {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.7);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.08);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-36px) scale(1.04);
+  }
+}

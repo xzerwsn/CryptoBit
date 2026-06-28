@@ -1,0 +1,293 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>{{ title }} | CryptoBit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0a0d14;
+    --bg-2: #111826;
+    --surface: rgba(14, 19, 31, 0.84);
+    --surface-2: rgba(255, 255, 255, 0.05);
+    --text: #eef3ff;
+    --text-2: #aab6d1;
+    --border: rgba(151, 167, 199, 0.2);
+    --accent: #ffb347;
+    --accent-2: #ff7a59;
+    --danger: #ff8f8f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(255, 179, 71, 0.16), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(255, 122, 89, 0.18), transparent 28%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .shell {
+    width: min(1080px, 100%);
+    display: grid;
+    grid-template-columns: minmax(280px, 1.05fr) minmax(320px, 0.95fr);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    overflow: hidden;
+    background: rgba(7, 10, 18, 0.72);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.35);
+  }
+  .intro, .panel { padding: 40px; }
+  .intro {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+      linear-gradient(135deg, rgba(255, 179, 71, 0.14), rgba(255, 122, 89, 0.08));
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-2);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .logo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 18px rgba(255, 179, 71, 0.55);
+  }
+  h1 {
+    margin: 18px 0 12px;
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+  }
+  .lead, .feature {
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+  .stats {
+    display: grid;
+    gap: 12px;
+  }
+  .stat {
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .stat strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 18px;
+  }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .panel h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    letter-spacing: -0.03em;
+  }
+  .panel p {
+    margin: 0 0 26px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+  form {
+    display: grid;
+    gap: 16px;
+  }
+  .field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .auth-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .auth-input:focus {
+    border-color: rgba(255, 179, 71, 0.7);
+    box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.12);
+    transform: translateY(-1px);
+  }
+  .auth-help {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-2);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .field-errors, .non-field-errors {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--danger);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .submit {
+    border: none;
+    border-radius: 14px;
+    padding: 15px 18px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #17120c;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .alt {
+    margin-top: 18px;
+    color: var(--text-2);
+    text-align: center;
+  }
+  .alt a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .intro { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .intro, .panel { padding: 24px; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <section class="intro">
+      <div>
+        <div class="eyebrow"><span class="logo-dot"></span> CryptoBit </div>
+        <h1>Торгуйте криптовалютой без лишних сложностей</h1>
+        <div class="lead">
+          Войдите в персональный кабинет, отслеживайте сделки, управляйте профилем и держите рынок под рукой.
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <strong>Персональная история</strong>
+          <div class="feature">Сохраняйте все покупки и продажи, чтобы быстро анализировать свою активность.</div>
+        </div>
+        <div class="stat">
+          <strong>Профиль и настройки</strong>
+          <div class="feature">Обновляйте данные, управляйте видимостью профиля и настраивайте аккаунт под себя.</div>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>{{ title }}</h2>
+      <p>{{ subtitle }}</p>
+      {% if form.non_field_errors %}
+        <ul class="non-field-errors">
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.first_name %}
+          <div class="row">
+            <div class="field">
+              <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+              {{ form.first_name }}
+              {% if form.first_name.errors %}<ul class="field-errors">{% for error in form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+            </div>
+            <div class="field">
+              <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+              {{ form.last_name }}
+              {% if form.last_name.errors %}<ul class="field-errors">{% for error in form.last_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+            </div>
+          </div>
+        {% endif %}
+        <div class="field">
+          <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+          {{ form.username }}
+          {% if form.username.help_text %}{{ form.username.help_text|safe }}{% endif %}
+          {% if form.username.errors %}<ul class="field-errors">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+        {% if form.email %}
+          <div class="field">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.errors %}<ul class="field-errors">{% for error in form.email.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endif %}
+        {% if form.nickname %}
+          <div class="field">
+            <label for="{{ form.nickname.id_for_label }}">{{ form.nickname.label }}</label>
+            {{ form.nickname }}
+            {% if form.nickname.errors %}<ul class="field-errors">{% for error in form.nickname.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endif %}
+        {% if form.password %}
+          <div class="field">
+            <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            {{ form.password }}
+            {% if form.password.errors %}<ul class="field-errors">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% else %}
+          <div class="field">
+            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            {{ form.password1 }}
+            {% if form.password1.help_text %}{{ form.password1.help_text|safe }}{% endif %}
+            {% if form.password1.errors %}<ul class="field-errors">{% for error in form.password1.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endif %}
+        {% if form.password2 %}
+          <div class="field">
+            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}<ul class="field-errors">{% for error in form.password2.errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endif %}
+        <button class="submit" type="submit">{{ submit_label }}</button>
+      </form>
+      <div class="alt">
+        <a href="{{ alternate_url }}">{{ alternate_label }}</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

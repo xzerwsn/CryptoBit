@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<title>CryptoBit - &#1058;&#1086;&#1088;&#1075;&#1086;&#1074;&#1099;&#1081; &#1090;&#1077;&#1088;&#1084;&#1080;&#1085;&#1072;&#1083;</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+<link rel="stylesheet" href="{% static 'css/animations.css' %}" />
+
+<script id="__django_data" type="application/json">{{ django_data_json|safe }}</script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<form id="__cw-trade-form" method="POST" action="/" style="display:none">
+  {% csrf_token %}
+  <input type="hidden" name="asset" id="__cw-asset-id" />
+  <input type="hidden" name="trade_type" id="__cw-trade-type" />
+  <input type="hidden" name="amount" id="__cw-amount" />
+  <input type="hidden" name="price" id="__cw-price" />
+</form>
+
+<div id="root"></div>
+
+<script type="text/babel" src="{% static 'js/components/primitives.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/icons.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/terminal.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/profile.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/support.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/admin.jsx' %}"></script>
+<script type="text/babel" src="{% static 'js/components/app.jsx' %}"></script>
+</body>
+</html>
