@@ -7,3 +7,4 @@ plotly              # Для интерактивных графиков в бр
 django-bootstrap5   # Для быстрого и аккуратного оформления интерфейса
 yfinance            # Yahoo Finance
 uvicorn
+daphne
