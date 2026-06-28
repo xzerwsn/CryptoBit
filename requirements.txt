@@ -8,3 +8,4 @@ django-bootstrap5   # Для быстрого и аккуратного офор
 yfinance            # Yahoo Finance
 uvicorn
 daphne
+channels
